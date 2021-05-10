@@ -58,10 +58,16 @@ class PhotoMeaker:
 
     def make_photo(self):
         clip = VideoFileClip(self.Run.dir + '\\movies\\' + self.file)
+        photos=self.count_photos()
+        item=0
         for i  in range(0,self.count_photos()):
+            frame = self.set_round_number(clip)
+            mess = 'creating photos for ' + self.file + ' ' + str(item + 1) + '/' + str(photos)
             frame=self.set_round_number(clip)
-            clip.save_frame(self.Run.dir+'\\photos\\'+self.file+'\\' + str(frame) + '.png',
+            clip.save_frame(self.Run.dir+'\\photos\\'+self.file+'\\' + str(stringManipupations.random(20)) + '.png',
                             t=frame)
+            print(mess)
+            item=item+1
 
 class stringManipupations:
 

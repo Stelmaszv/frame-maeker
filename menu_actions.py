@@ -76,9 +76,9 @@ class Start(AbstractList):
         print('\n')
         for dir in os.listdir(self.Run.dir+'\\movies'):
             if dir.endswith(movie_ext):
+                cunter_str = str(counter) + '/' + str(len(os.listdir(self.Run.dir + '\\movies')))
+                print('Movie - ' + dir + ' ' + cunter_str)
                 PhotoMeaker(self.Run,dir).make_photo()
-                cunter_str=str(counter) + '/' + str(len(os.listdir(self.Run.dir + '\\movies')))
-                print('Movie - '+dir+' '+cunter_str)
                 counter=counter+1
         print('\n')
         print('Adding photos to movies End !')
