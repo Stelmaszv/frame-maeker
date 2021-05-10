@@ -3,6 +3,8 @@ from menu_actions import Exit,SetDir
 class Run:
 
     dir=''
+    movie_dir=''
+    photo_dir=''
 
     def start(self):
         run=True
