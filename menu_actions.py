@@ -51,7 +51,7 @@ class SetDir(AbstractList):
 class ListDir(AbstractList):
 
     def run(self):
-        for dir in os.listdir(self.Run.movie_dir):
+        for dir in os.listdir(self.Run.dir+'\\movies'):
             if dir.endswith(movie_ext):
                 print(dir)
 
@@ -69,10 +69,18 @@ class Start(AbstractList):
             return self.set_round_number(clip)
 
     def run(self):
-
         from core import PhotoMeaker
+        counter=1
+        print('\n')
+        print('Adding photos to movies')
+        print('\n')
         for dir in os.listdir(self.Run.dir+'\\movies'):
             if dir.endswith(movie_ext):
                 PhotoMeaker(self.Run,dir).make_photo()
-
+                cunter_str=str(counter) + '/' + str(len(os.listdir(self.Run.dir + '\\movies')))
+                print('Movie - '+dir+' '+cunter_str)
+                counter=counter+1
+        print('\n')
+        print('Adding photos to movies End !')
+        print('\n')
 

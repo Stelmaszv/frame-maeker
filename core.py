@@ -6,9 +6,7 @@ from moviepy.editor import VideoFileClip
 
 class Run:
 
-    dir=''
-    movie_dir=''
-    photo_dir=''
+    dir='D:\project\Frame-Meaker\output'
     photos_in_dir=20
 
     def start(self):
@@ -27,6 +25,7 @@ class Run:
             Obj.run()
 
     def set_menu(self):
+        print('\n')
         print('0: exit')
         if len(self.dir)==0:
             print('1:set dir')
@@ -34,6 +33,7 @@ class Run:
             print('1:change dir ', self.dir)
             print('2:list dir')
             print('3:start')
+        print('\n')
 
 class PhotoMeaker:
 
