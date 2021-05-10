@@ -1,4 +1,4 @@
-from menu_actions import Exit,SetDir
+from menu_actions import Exit,SetDir,ListDir
 
 class Run:
 
@@ -14,7 +14,8 @@ class Run:
             action= input('What do you whant to do ? ')
             switcher = {
                 '0': Exit(self),
-                '1': SetDir(self)
+                '1': SetDir(self),
+                '2': ListDir(self)
             }
             Obj = switcher.get(action, "Invalid data");
             Obj.run()
@@ -24,6 +25,6 @@ class Run:
         if len(self.dir)==0:
             print('1:set dir')
         else:
-            print('2:start')
-            print('3:change dir ',self.dir)
-            print('4:list dir')
+            print('1:change dir ', self.dir)
+            print('2:list dir')
+            print('3:start')

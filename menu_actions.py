@@ -46,4 +46,10 @@ class SetDir(AbstractList):
                 if os.path.isdir(movie_dir_location) is False:
                     os.mkdir(movie_dir_location)
 
+class ListDir(AbstractList):
+
+    def run(self):
+        for dir in os.listdir(self.Run.movie_dir):
+            if dir.endswith(movie_ext):
+                print(dir)
 
