@@ -1,6 +1,9 @@
 from abc import ABC,abstractmethod
+from moviepy.editor import VideoFileClip
 import os.path
+import random
 movie_ext=('.avi','.mkv','.mp4')
+
 class AbstractList(ABC):
 
     def __init__(self,Run):
@@ -52,4 +55,23 @@ class ListDir(AbstractList):
         for dir in os.listdir(self.Run.movie_dir):
             if dir.endswith(movie_ext):
                 print(dir)
+
+class Start(AbstractList):
+
+    procent_limt = 96
+
+    def set_round_number(self, clip):
+        duration = int(clip.duration)
+        round_nomber = random.randint(0, int(clip.duration))
+        procent = int(round_nomber / duration * 100)
+        if procent <= self.procent_limt:
+            return round_nomber
+        else:
+            return self.set_round_number(clip)
+
+    def run(self):
+        from core import stringManipupations
+        clip = VideoFileClip('D:\project\Frame-Meaker\output\movies\The X-Files Season 01 Episode 01 - Pilot.avi')
+        clip.save_frame('D:\project\Frame-Meaker\output\photos\The X-Files Season 01 Episode 01 - Pilot.avi' + '\\' + str(stringManipupations.random(20)) + '.png',
+                        t=self.set_round_number(clip))
 
