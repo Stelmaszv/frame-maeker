@@ -1,8 +1,8 @@
-from menu_actions import Exit
+from menu_actions import Exit,SetDir
 
 class Run:
 
-    dir='rwg'
+    dir=''
 
     def start(self):
         run=True
@@ -11,7 +11,8 @@ class Run:
             self.set_menu()
             action= input('What do you whant to do ? ')
             switcher = {
-                '0': Exit()
+                '0': Exit(),
+                '1': SetDir()
             }
             Obj = switcher.get(action, "Invalid data");
             Obj.run()
@@ -21,6 +22,6 @@ class Run:
         if len(self.dir)==0:
             print('1:set dir')
         else:
-            print('1:start')
-            print('2:change dir')
-            print('3:list dir')
+            print('2:start')
+            print('3:change dir ',self.dir)
+            print('4:list dir')

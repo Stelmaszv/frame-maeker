@@ -9,3 +9,8 @@ class Exit(AbstractList):
 
     def run(self):
         exit()
+
+class SetDir(AbstractList):
+
+    def run(self):
+        print('set dir')
