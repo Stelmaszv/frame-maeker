@@ -1,3 +1,5 @@
+from menu_actions import Exit
+
 class Run:
 
     dir='rwg'
@@ -8,11 +10,11 @@ class Run:
         while run != False:
             self.set_menu()
             action= input('What do you whant to do ? ')
-            if action == '0':
-                run = False
-
-            if action == '1':
-                print('dir')
+            switcher = {
+                '0': Exit()
+            }
+            Obj = switcher.get(action, "Invalid data");
+            Obj.run()
 
     def set_menu(self):
         print('0: exit')
