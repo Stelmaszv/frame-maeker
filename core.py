@@ -53,15 +53,14 @@ class PhotoMeaker:
             return self.set_round_number(clip)
 
     def count_photos(self):
-       phots= len(os.listdir(self.Run.dir + '\\movies'))
-       print(self.Run.photos_in_dir-phots)
+       phots= len(os.listdir(self.Run.dir + '\\photos\\' + self.file))
        return self.Run.photos_in_dir-phots
 
     def make_photo(self):
+        clip = VideoFileClip(self.Run.dir + '\\movies\\' + self.file)
         for i  in range(0,self.count_photos()):
-            clip = VideoFileClip('D:\project\Frame-Meaker\output\movies\The X-Files Season 01 Episode 01 - Pilot.avi')
             frame=self.set_round_number(clip)
-            clip.save_frame('D:\project\Frame-Meaker\output\photos\The X-Files Season 01 Episode 01 - Pilot.avi' + '\\' + str(frame) + '.png',
+            clip.save_frame(self.Run.dir+'\\photos\\'+self.file+'\\' + str(frame) + '.png',
                             t=frame)
 
 class stringManipupations:
