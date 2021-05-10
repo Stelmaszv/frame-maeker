@@ -11,8 +11,8 @@ class Run:
             self.set_menu()
             action= input('What do you whant to do ? ')
             switcher = {
-                '0': Exit(),
-                '1': SetDir()
+                '0': Exit(self),
+                '1': SetDir(self)
             }
             Obj = switcher.get(action, "Invalid data");
             Obj.run()
