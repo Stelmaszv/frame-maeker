@@ -1,5 +1,6 @@
 from abc import ABC,abstractmethod
 from moviepy.editor import VideoFileClip
+
 import os.path
 import random
 movie_ext=('.avi','.mkv','.mp4')
@@ -36,8 +37,6 @@ class SetDir(AbstractList):
             self.make_dir(photo_dir)
             self.prepare_dir()
             self.Run.dir=dir
-            self.Run.movie_dir = movie_dir
-            self.Run.photo_dir = photo_dir
         else:
             print(dir, 'This is not dir location')
             self.run()
@@ -70,8 +69,10 @@ class Start(AbstractList):
             return self.set_round_number(clip)
 
     def run(self):
-        from core import stringManipupations
-        clip = VideoFileClip('D:\project\Frame-Meaker\output\movies\The X-Files Season 01 Episode 01 - Pilot.avi')
-        clip.save_frame('D:\project\Frame-Meaker\output\photos\The X-Files Season 01 Episode 01 - Pilot.avi' + '\\' + str(stringManipupations.random(20)) + '.png',
-                        t=self.set_round_number(clip))
+
+        from core import PhotoMeaker
+        for dir in os.listdir(self.Run.dir+'\\movies'):
+            if dir.endswith(movie_ext):
+                PhotoMeaker(self.Run,dir).make_photo()
+
 

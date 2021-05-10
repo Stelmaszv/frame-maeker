@@ -1,12 +1,15 @@
 import random
 import string
+import os.path
 from menu_actions import Exit,SetDir,ListDir,Start
+from moviepy.editor import VideoFileClip
 
 class Run:
 
     dir=''
     movie_dir=''
     photo_dir=''
+    photos_in_dir=20
 
     def start(self):
         run=True
@@ -31,6 +34,35 @@ class Run:
             print('1:change dir ', self.dir)
             print('2:list dir')
             print('3:start')
+
+class PhotoMeaker:
+
+    procent_limt = 96
+
+    def __init__(self,Run,file):
+        self.file=file
+        self.Run=Run
+
+    def set_round_number(self, clip):
+        duration = int(clip.duration)
+        round_nomber = random.randint(0, int(clip.duration))
+        procent = int(round_nomber / duration * 100)
+        if procent <= self.procent_limt:
+            return round_nomber
+        else:
+            return self.set_round_number(clip)
+
+    def count_photos(self):
+       phots= len(os.listdir(self.Run.dir + '\\movies'))
+       print(self.Run.photos_in_dir-phots)
+       return self.Run.photos_in_dir-phots
+
+    def make_photo(self):
+        for i  in range(0,self.count_photos()):
+            clip = VideoFileClip('D:\project\Frame-Meaker\output\movies\The X-Files Season 01 Episode 01 - Pilot.avi')
+            frame=self.set_round_number(clip)
+            clip.save_frame('D:\project\Frame-Meaker\output\photos\The X-Files Season 01 Episode 01 - Pilot.avi' + '\\' + str(frame) + '.png',
+                            t=frame)
 
 class stringManipupations:
 
