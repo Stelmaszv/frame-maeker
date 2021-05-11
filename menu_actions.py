@@ -1,8 +1,6 @@
-from abc import ABC,abstractmethod
-from moviepy.editor import VideoFileClip
-
 import os.path
 import random
+from abc import ABC,abstractmethod
 movie_ext=('.avi','.mkv','.mp4','.wmv')
 
 class AbstractList(ABC):
@@ -75,4 +73,27 @@ class Start(AbstractList):
         print('\n')
         print('Adding photos to movies End !')
         print('\n')
+
+class OneMovie(AbstractList):
+
+    def run(self):
+        from core import PhotoMeaker
+        file = input('Movie Location : ')
+        if file in os.listdir(self.Run.dir+'\\movies'):
+            if file.endswith(movie_ext):
+                print('\n')
+                print('Adding photos to movies')
+                print('\n')
+                cunter_str = str(1) + '/' + str(1)
+                print('Movie - ' + file + ' ' + cunter_str)
+                PhotoMeaker(self.Run,file).make_photo()
+                print('\n')
+                print('Adding photos to movies End !')
+                print('\n')
+            else:
+                print(dir, 'This ext is not allowed')
+                self.run()
+        else:
+            print(dir, 'This is not dir location')
+            self.run()
 

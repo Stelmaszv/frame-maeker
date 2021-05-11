@@ -1,7 +1,7 @@
 import random
 import string
 import os.path
-from menu_actions import Exit,SetDir,ListDir,Start
+from menu_actions import Exit,SetDir,ListDir,Start,OneMovie
 from moviepy.editor import VideoFileClip
 
 class Run:
@@ -19,7 +19,8 @@ class Run:
                 '0': Exit(self),
                 '1': SetDir(self),
                 '2': ListDir(self),
-                '3': Start(self)
+                '3': OneMovie(self),
+                '4': Start(self)
             }
             Obj = switcher.get(action, "Invalid data");
             Obj.run()
@@ -32,12 +33,15 @@ class Run:
         else:
             print('1:change dir ', self.dir)
             print('2:list dir')
-            print('3:start')
+            print('3:One movie')
+            print('4:start')
+
         print('\n')
 
 class PhotoMeaker:
 
     procent_limt = 96
+    photo_dir=''
 
     def __init__(self,Run,file):
         self.file=file
@@ -45,9 +49,10 @@ class PhotoMeaker:
         self.create_dir()
 
     def create_dir(self):
-        dir=self.Run.dir + '\\photos\\'+ self.file
-        if os.path.isdir(dir) is False:
-            os.mkdir(dir)
+        if len(self.photo_dir)==0:
+            self.photo_dir=self.Run.dir + '\\photos\\'+ self.file
+            if os.path.isdir(self.photo_dir) is False:
+                os.mkdir(self.photo_dir)
 
     def set_round_number(self, clip):
         duration = int(clip.duration)
@@ -59,7 +64,7 @@ class PhotoMeaker:
             return self.set_round_number(clip)
 
     def count_photos(self):
-       phots= len(os.listdir(self.Run.dir + '\\photos\\' + self.file))
+       phots= len(os.listdir(self.photo_dir))
        return self.Run.photos_in_dir-phots
 
     def make_photo(self):
@@ -70,7 +75,7 @@ class PhotoMeaker:
             frame = self.set_round_number(clip)
             mess = 'creating photos for ' + self.file + ' ' + str(item + 1) + '/' + str(photos)
             frame=self.set_round_number(clip)
-            clip.save_frame(self.Run.dir+'\\photos\\'+self.file+'\\' + str(StringManipupations.random(20)) + '.png',
+            clip.save_frame(self.photo_dir+'\\' + str(StringManipupations.random(20)) + '.png',
                             t=frame)
             print(mess)
             item=item+1
