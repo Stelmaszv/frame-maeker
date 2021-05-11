@@ -3,7 +3,7 @@ from moviepy.editor import VideoFileClip
 
 import os.path
 import random
-movie_ext=('.avi','.mkv','.mp4')
+movie_ext=('.avi','.mkv','.mp4','.wmv')
 
 class AbstractList(ABC):
 
@@ -35,18 +35,10 @@ class SetDir(AbstractList):
             photo_dir= dir + '\\photos'
             self.make_dir(movie_dir)
             self.make_dir(photo_dir)
-            self.prepare_dir()
             self.Run.dir=dir
         else:
             print(dir, 'This is not dir location')
             self.run()
-
-    def prepare_dir(self):
-        for dir in os.listdir(self.dir+'\\movies'):
-            if dir.endswith(movie_ext):
-                movie_dir_location=self.dir+'\\photos\\'+dir
-                if os.path.isdir(movie_dir_location) is False:
-                    os.mkdir(movie_dir_location)
 
 class ListDir(AbstractList):
 

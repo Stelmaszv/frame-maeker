@@ -42,6 +42,12 @@ class PhotoMeaker:
     def __init__(self,Run,file):
         self.file=file
         self.Run=Run
+        self.create_dir()
+
+    def create_dir(self):
+        dir=self.Run.dir + '\\photos\\'+ self.file
+        if os.path.isdir(dir) is False:
+            os.mkdir(dir)
 
     def set_round_number(self, clip):
         duration = int(clip.duration)
@@ -64,12 +70,12 @@ class PhotoMeaker:
             frame = self.set_round_number(clip)
             mess = 'creating photos for ' + self.file + ' ' + str(item + 1) + '/' + str(photos)
             frame=self.set_round_number(clip)
-            clip.save_frame(self.Run.dir+'\\photos\\'+self.file+'\\' + str(stringManipupations.random(20)) + '.png',
+            clip.save_frame(self.Run.dir+'\\photos\\'+self.file+'\\' + str(StringManipupations.random(20)) + '.png',
                             t=frame)
             print(mess)
             item=item+1
 
-class stringManipupations:
+class StringManipupations:
 
     @staticmethod
     def short(string,limit) ->str:
